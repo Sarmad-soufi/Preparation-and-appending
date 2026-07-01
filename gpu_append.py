@@ -1,10 +1,10 @@
 import re
 import argparse
 
-parser = argparse.ArgumentParser(description="Insert AutoDock GPU energies into column 10.")
-parser.add_argument("gpu_txt", help="Path to gpu_results.txt")
-parser.add_argument("input_csv", help="CSV already containing other energies")
-parser.add_argument("output_csv", help="Output CSV with GPU energies added")
+#parser = argparse.ArgumentParser(description="Insert AutoDock4 energies into column (put prefered column number).")
+#parser.add_argument("file_name", help="Path to results.txt")
+#parser.add_argument("file_name", help="path to input file")
+#parser.add_argument("file_name", help="path to output")
 
 args = parser.parse_args()
 
@@ -50,4 +50,4 @@ with open(args.input_csv) as infile, open(args.output_csv, "w") as outfile:
 
         outfile.write(",".join(columns) + "\n")
 
-print("Finished. GPU energies inserted into column 10.")
+print("Finished. GPU energies inserted into column #.")
