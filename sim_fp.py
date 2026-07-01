@@ -19,14 +19,12 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-# load retro 2 structure
-r2_smiles = "CC1=CC=C(S1)CNC1=CC=CC=C1C(=O)NC1CCCCC1"
-r2 = Chem.MolFromSmiles(r2_smiles)
+drug_smiles = "input the reference drug smiles"
+drug = Chem.MolFromSmiles(drug_smiles)
 
-# generate fingerprint for reference molecule
-r2_fp = AllChem.GetMorganFingerprintAsBitVect(
-    r2,
-    radius=2,
+drug_fp = AllChem.GetMorganFingerprintAsBitVect(
+    drug,
+    radius=2,  #these settings are usually applied in literature for ideal morgan fingerprinting
     nBits=2048
 )
 
@@ -39,16 +37,14 @@ with open(args.filename, "r") as smi_file:
             continue
 
         logp = Crippen.MolLogP(mol)
-
-        # generate fingerprint for query molecule
+        
         mol_fp = AllChem.GetMorganFingerprintAsBitVect(
             mol,
             radius=2,
             nBits=2048
         )
 
-        # calculate Tanimoto similarity
-        sim = DataStructs.TanimotoSimilarity(r2_fp, mol_fp)
+        sim = DataStructs.TanimotoSimilarity(drug_fp, mol_fp)
 
         if sim >= args.sim:
             print(f"{smi},{sim:.2f},{logp:.2f},{mol.GetNumAtoms()}")
