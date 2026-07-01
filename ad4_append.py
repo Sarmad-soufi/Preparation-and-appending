@@ -1,16 +1,15 @@
 import re
 import argparse
 
-parser = argparse.ArgumentParser(description="Insert AutoDock4 energies into column 9.")
-parser.add_argument("ad4_txt", help="Path to ad4_results.txt")
-parser.add_argument("input_csv", help="CSV already containing Vina/Vinardo energies")
-parser.add_argument("output_csv", help="Output CSV with AutoDock4 energies added")
+#parser = argparse.ArgumentParser(description="Insert AutoDock4 energies into column (put prefered column number).")
+#parser.add_argument("file_name", help="Path to results.txt")
+#parser.add_argument("file_name", help="path to input file")
+#parser.add_argument("file_name", help="path to output")
 
 args = parser.parse_args()
 
 ad4_dict = {}
 
-# ---- Parse AutoDock4 results ----
 with open(args.ad4_txt) as f:
     for line in f:
         match = re.search(r"(ZINC\d+_\d+)_out.*?VINA RESULT:\s*(-?\d+\.\d+)", line)
@@ -21,7 +20,6 @@ with open(args.ad4_txt) as f:
 
 print(f"Parsed {len(ad4_dict)} AutoDock4 energies.")
 
-# ---- Insert into CSV ----
 with open(args.input_csv) as infile, open(args.output_csv, "w") as outfile:
 
     header = infile.readline().strip().split(",")
@@ -49,4 +47,4 @@ with open(args.input_csv) as infile, open(args.output_csv, "w") as outfile:
 
         outfile.write(",".join(columns) + "\n")
 
-print("Finished. AutoDock4 energies inserted into column 9.")
+print("Finished. AutoDock4 energies inserted into column #.")
