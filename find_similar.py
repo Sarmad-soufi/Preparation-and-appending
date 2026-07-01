@@ -20,9 +20,8 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-# load retro 2 structure
-r2_smiles = "CC1=CC=C(S1)CNC1=CC=CC=C1C(=O)NC1CCCCC1"
-r2 = Chem.MolFromSmiles(r2_smiles)
+#drug_smiles = "load drug smiles"
+#drug = Chem.MolFromSmiles(drug_smiles)
 
 output_lines = []
 
