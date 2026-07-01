@@ -1,10 +1,10 @@
 import re
 import argparse
 
-parser = argparse.ArgumentParser(description="Merge Vina energies into CSV (column 7).")
-parser.add_argument("vina_txt", help="Path to vina_results.txt")
-parser.add_argument("input_csv", help="Path to input similarity CSV")
-parser.add_argument("output_csv", help="Path to output CSV")
+#parser = argparse.ArgumentParser(description="Insert AutoDock4 energies into column (put prefered column number).")
+#parser.add_argument("file_name", help="Path to results.txt")
+#parser.add_argument("file_name", help="path to input file")
+#parser.add_argument("file_name", help="path to output")
 
 args = parser.parse_args()
 
@@ -41,7 +41,7 @@ with open(input_csv, "r") as infile, open(output_csv, "w") as outfile:
 
         columns = line.split(",")
 
-        while len(columns) < 7:
+        while len(columns) < #:
             columns.append("")
 
         zinc_id = columns[0]
@@ -50,5 +50,5 @@ with open(input_csv, "r") as infile, open(output_csv, "w") as outfile:
         columns[6] = str(energy)
         outfile.write(",".join(columns) + "\n")
 
-print("Finished. Energies inserted into column 7.")
+print("Finished. Energies inserted into column #.")
 
